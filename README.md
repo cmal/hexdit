@@ -14,7 +14,7 @@ electron .                       # start electron from another terminal
 ## Releasing
 
 ```shell
-lein do clean, cljsbuild once renderer-release, cljsbuild once main-release
+lein do clean, less once, cljsbuild once renderer-release, cljsbuild once main-release
 electron . # start electron to test that everything works
 ```
 

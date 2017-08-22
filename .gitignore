@@ -1,4 +1,4 @@
 target/
-resources/public/css/*
-resources/public/js/*
+resources/public/css
+resources/public/js
 figwheel_server.log
