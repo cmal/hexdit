@@ -1,6 +1,6 @@
 # Hexdit
 
-A hexo blog client build with electron and re-frame
+A Hexo blog editor built on electron and reagent
 
 ## Running it
 
