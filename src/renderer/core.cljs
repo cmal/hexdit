@@ -1,13 +1,12 @@
 (ns renderer.core
-  (:require [reagent.core :as reagent :refer [atom]]))
+  (:require [reagent.core :as reagent :refer [atom]]
+            [renderer.router :as router :refer [app-routers current-page]]))
 
 (set! *warn-on-infer* true)
-
 (enable-console-print!)
 
-(defn root-component []
-  [:div "Hello"])
+(app-routers)
 
 (reagent/render
-  [root-component]
+  [current-page]
   (js/document.getElementById "app-container"))
