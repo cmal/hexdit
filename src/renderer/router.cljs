@@ -4,7 +4,8 @@
               [secretary.core :as secretary]
               [goog.events :as events]
               [goog.history.EventType :as EventType]
-              [renderer.page :refer [home]])
+              [renderer.page.pages :refer [pages]]
+              [renderer.page.posts :refer [posts]])
     (:import goog.History))
 
 (def app-state (atom {}))
@@ -18,12 +19,15 @@
     (.setEnabled true)))
 
 (defn app-routers []
+  (secretary/set-config! :prefix "#")
   (defroute "/" []
-    (swap! app-state assoc :page :home))
-  (defroute "/post" []
-    (swap! app-state assoc :page :home))
+    (swap! app-state assoc :page :posts))
+  (defroute "/pages" []
+    (swap! app-state assoc :page :pages))
   (hook-brower-navigation!))
 
 (defmulti current-page #(@app-state :page))
-(defmethod current-page :home [] 
-  [home])
+(defmethod current-page :posts [] 
+  [posts])
+(defmethod current-page :pages [] 
+  [pages])

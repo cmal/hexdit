@@ -9,6 +9,7 @@
                  [reagent "0.6.1"]
                  [re-frame "0.10.1"]
                  [secretary "1.2.3"]
+                 [binaryage/devtools "0.9.4"]
                  [ring/ring-core "1.6.1"]]
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-less "1.7.5"]
