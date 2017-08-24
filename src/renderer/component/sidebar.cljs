@@ -1,31 +1,21 @@
 (ns renderer.component.sidebar
-  (:require [reagent.core :as reagent :refer [atom]]
-            [class-names.core :refer [class-names]]))
-
-(def menu-list [{:id "posts" 
-                 :label "文章" 
-                 :link "#/"
-                 :icon "img/posts.svg"}
-                {:id "pages" 
-                 :label "页面" 
-                 :link "#/pages"
-                 :icon "img/pages.svg"}])
-
-(def selected-id (atom (:id (first menu-list))))
+  (:require [reagent.core :as reagent]
+            [re-frame.core :as rf]
+            [class-names.core :refer [class-names]]
+            [renderer.constants :refer [menu-list]]))
 
 (defn click-menu-item [item]
-  (let [current-id (:id item)]
-    (reset! selected-id current-id)))
+ (rf/dispatch-sync [:switch-page (:id item)]))
 
 (defn menu-item [item]
-  [:li {:class (class-names "menu-item"
-                            {:active (= (:id item) @selected-id)})}
-    [:a {:class "menu-item-link" 
-         :href (:link item)
-         :on-click #(click-menu-item item)}
+  (let [item-id (:id item)
+        current-id @(rf/subscribe [:current-page])
+        is-active? (= item-id current-id)]
+    [:li {:class (class-names "menu-item" {:active is-active?})
+          :on-click #(click-menu-item item)}
      [:img {:class "menu-item-icon"
             :src (:icon item)}]
-     [:span (:label item)]]])
+     [:span (:label item)]]))
 
 (defn menu [menu-list]
   [:div {:class "menu-warp"}
