@@ -2,8 +2,14 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [class-names.core :refer [class-names]]))
 
-(def menu-list [{:id "posts" :label "文章" :link "#/"}
-                {:id "pages" :label "页面" :link "#/pages"}])
+(def menu-list [{:id "posts" 
+                 :label "文章" 
+                 :link "#/"
+                 :icon "img/posts.svg"}
+                {:id "pages" 
+                 :label "页面" 
+                 :link "#/pages"
+                 :icon "img/pages.svg"}])
 
 (def selected-id (atom (:id (first menu-list))))
 
@@ -17,7 +23,9 @@
     [:a {:class "menu-item-link" 
          :href (:link item)
          :on-click #(click-menu-item item)}
-     (:label item)]])
+     [:img {:class "menu-item-icon"
+            :src (:icon item)}]
+     [:span (:label item)]]])
 
 (defn menu [menu-list]
   [:div {:class "menu-warp"}

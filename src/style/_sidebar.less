@@ -18,14 +18,31 @@
 
     .menu {
       list-style: none;
-      text-align: center;
+      font-size: 15px;
     }
 
     .menu-item {
+      padding: 3px 0 3px 30px;
+      line-height: 1.5;
+
+      .menu-item-icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+        position: relative;
+        top: 4px;
+      }
+
       .menu-item-link {
+        display: block;
         color: #ffffff;
-        font-weight: lighter;
+        font-weight: 200;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         text-decoration: none;
+      }
+
+      &.active {
+        background-color: #0e83cd;
       }
     }
   }
