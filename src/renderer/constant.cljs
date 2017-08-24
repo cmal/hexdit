@@ -1,4 +1,4 @@
-(ns renderer.constants)
+(ns renderer.constant)
 
 (def menu-list [{:id "posts" 
                  :label "文章" 

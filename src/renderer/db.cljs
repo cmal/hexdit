@@ -1,7 +1,7 @@
 (ns renderer.db
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
-            [renderer.constants :refer [menu-list]]))
+            [renderer.constant :refer [menu-list]]))
 
 (rf/reg-event-db
   :initialize

@@ -2,7 +2,7 @@
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [class-names.core :refer [class-names]]
-            [renderer.constants :refer [menu-list]]))
+            [renderer.constant :refer [menu-list]]))
 
 (defn click-menu-item [item]
  (rf/dispatch-sync [:switch-page (:id item)]))
