@@ -1,5 +1,8 @@
 {
   "name": "hexdit",
   "version": "0.1.0",
-  "main": "resources/main.js"
+  "main": "resources/main.js",
+  "dependencies": {
+    "nconf": "^0.8.4"
+  }
 }

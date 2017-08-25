@@ -1,4 +1,5 @@
-(ns main.core)
+(ns main.core
+  (:require [main.config]))
 
 (set! *warn-on-infer* true)
 

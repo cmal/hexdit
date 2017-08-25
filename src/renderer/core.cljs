@@ -3,15 +3,15 @@
             [re-frame.core :as rf]
             [devtools.core :as devtools]
             [renderer.db]
-            [renderer.router :as router]))
+            [renderer.router :refer [initial-routes current-page]]))
 
 (set! *warn-on-infer* true)
 (devtools/install!)
 (enable-console-print!)
 
 (defn ^export main []
-  (router/initial-routes)
+  (initial-routes)
   (rf/dispatch-sync [:initialize])
   (reagent/render
-    [router/current-page]
+    [current-page]
     (js/document.getElementById "app-container")))
