@@ -1,7 +1,11 @@
 .sidebar {
   height: 100%;
   width: 150px;
+  float: left;
   background: #171f26;
+  -webkit-user-select: none;
+  cursor: default;
+  z-index: 200;
 
   .logo-warp {
     padding: 10px 0;
@@ -31,9 +35,9 @@
       .menu-item-icon {
         width: 16px;
         height: 16px;
-        margin-right: 10px;
+        margin-right: 7px;
         position: relative;
-        top: 2px;
+        top: 3px;
       }
 
       &.active {

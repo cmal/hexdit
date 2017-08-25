@@ -3,7 +3,8 @@
             [re-frame.core :as rf]
             [devtools.core :as devtools]
             [renderer.db]
-            [renderer.component.sidebar :refer [sidebar]]))
+            [renderer.component.sidebar :refer [sidebar]]
+            [renderer.component.mdlist :refer [mdlist]]))
 
 (set! *warn-on-infer* true)
 (devtools/install!)
@@ -11,7 +12,9 @@
 
 (defn app []
   [:div {:class "main"}
-   [sidebar]])
+    [sidebar]
+    [:div {:class "content"}
+      [mdlist]]])
 
 (defn ^export main []
   (rf/dispatch-sync [:initialize])
