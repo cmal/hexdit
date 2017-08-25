@@ -3,21 +3,15 @@
             [re-frame.core :as rf]
             [devtools.core :as devtools]
             [renderer.db]
-            [renderer.component.sidebar :refer [sidebar]]
-            [renderer.component.mdlist :refer [mdlist]]))
+            [renderer.router :as router]))
 
 (set! *warn-on-infer* true)
 (devtools/install!)
 (enable-console-print!)
 
-(defn app []
-  [:div {:class "main"}
-    [sidebar]
-    [:div {:class "content"}
-      [mdlist]]])
-
 (defn ^export main []
+  (router/initial-routes)
   (rf/dispatch-sync [:initialize])
   (reagent/render
-    [app]
+    [router/current-page]
     (js/document.getElementById "app-container")))
