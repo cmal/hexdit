@@ -1,5 +1,7 @@
 (ns main.core
-  (:require [main.config]))
+  (:require [main.ipc :refer [registry-ipc]]
+            [main.config :refer [get-config set-config]]
+            [main.common :refer [app-window-options start-window-options]]))
 
 (set! *warn-on-infer* true)
 
@@ -10,14 +12,9 @@
 (def main-window (atom nil))
 
 (defn create-window []
-  (reset! main-window (browser-window.
-                        (clj->js {:width 960
-                                  :height 680
-                                  :minWidth 800
-                                  :minHeight 550
-                                  :show false})))
+  (reset! main-window (browser-window. start-window-options))
 
-  (.loadURL @main-window (str "file://" js/__dirname "/public/index.html"))
+  (.loadURL @main-window (str "file://" js/__dirname "/public/index.html#/start"))
   (.on @main-window "ready-to-show" (fn []
                                       (.show @main-window)
                                       (.focus @main-window)))
@@ -26,4 +23,6 @@
 (.on app "window-all-closed" #(when-not (= js/process.platform "darwin")
                                 (.quit app)))
 (.on app "activate" #(.show @main-window))
-(.on app "ready" create-window)
+(.on app "ready" (fn []
+                   (create-window)
+                   (registry-ipc)))

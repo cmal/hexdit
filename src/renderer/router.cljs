@@ -5,7 +5,7 @@
               [goog.events :as events]
               [goog.history.EventType :as EventType]
               [reagent.core :as reagent]
-              [renderer.view.app :refer [app]]
+              [renderer.view.blog :refer [blog]]
               [renderer.view.start :refer [start]]))
 
 (def app-state (reagent/atom {}))
@@ -20,15 +20,15 @@
 
 (defn initial-routes []
   (secretary/set-config! :prefix "#")
-  (defroute "/" []
-    (swap! app-state assoc :page :app))
+  (defroute "/blog" []
+    (swap! app-state assoc :page :blog))
   (defroute "/start" []
     (swap! app-state assoc :page :start))
   (hook-browser-navigation!))
 
 (defmulti current-page #(@app-state :page))
-(defmethod current-page :app [] 
-  [app])
+(defmethod current-page :blog [] 
+  [blog])
 (defmethod current-page :start []
   [start])
 

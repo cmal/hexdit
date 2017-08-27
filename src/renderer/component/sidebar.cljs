@@ -24,10 +24,10 @@
          ^{:key (:id item)}
          [menu-item item])]])
 
-(defn sidebar []
+(defn sidebar-component []
   [:div {:class "sidebar"}
    [:div {:class "logo-warp"}
     [:img {:class "logo"
            :src "img/logo.svg"}]]
-   [menu menu-list]])
+   [menu-component menu-list]])
 

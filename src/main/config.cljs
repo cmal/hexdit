@@ -8,18 +8,18 @@
 
 (enable-console-print!)
 
-(def app-config-path
+(def config-path
   (.join path (.getPath app "home") 
               ".hexdit.json"))
 
-(def app-config
-  (.file nconf (clj->js {:file app-config-path})))
+(def config
+  (.file nconf (clj->js {:file config-path})))
 
 (defn set-config [field value]
-  (.set app-config field value)
-  (.save app-config))
+  (.set config field value)
+  (.save config))
 
 (defn get-config [field]
-  (.load app-config)
-  (.get app-config field))
+  (.load config)
+  (.get config field))
 
