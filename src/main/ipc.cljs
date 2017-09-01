@@ -8,9 +8,9 @@
   (.on ipcMain "get-blog-list" 
        (fn [event _]
          (let [config (get-config "blog-list")
-               blog-list (if-not (= config nil) (js->clj config) [])]
+               blog-list (if-not (= config nil) config [])]
            (if (= config nil)
-             (set-config "blog-list" (clj->js blog-list)))
+             (set-config "blog-list" (clj->js [])))
            (aset event "returnValue" blog-list)))))
 
 (defn registry-ipc []

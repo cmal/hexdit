@@ -7,4 +7,9 @@
 (def blog-list (.sendSync ipcRenderer "get-blog-list"))
 
 (defn blog-list-component []
-  [:div {:class "list blog-list"}])
+  [:ul {:class "list blog-list"}
+   (for [blog blog-list]
+     ^{:key (str (.-title blog) ": " (.-path blog) )}
+     [:li {:class "blog-item"}
+      [:h2 {:class "blog-title"} (.-title blog)]
+      [:p {:class "blog-description"} (.-description blog)]])])

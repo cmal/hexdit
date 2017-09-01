@@ -5,7 +5,7 @@
   :description "A hexo blog client build with electron and re-frame"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.908"]
-                 [figwheel "0.5.13"]
+                 [figwheel "0.5.10"]
                  [reagent "0.6.1"]
                  [re-frame "0.10.1"]
                  [secretary "1.2.3"]
@@ -14,8 +14,8 @@
                  [ring/ring-core "1.6.1"]]
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-less "1.7.5"]
-            [lein-figwheel "0.5.13"]
-            [lein-cooper "1.2.2"]]
+            [lein-figwheel "0.5.10"]
+            [lein-cooper "1.2.1"]]
 
   :clean-targets ^{:protect false} ["resources/main.js"
                                     "resources/public/js/renderer.js"

@@ -4,4 +4,8 @@
 
 (defn start []
   [:div {:class "start view"}
-   [blog-list-component]])
+   [:div {:class "start-header"}
+    [:h1 {:class "start-title"}
+      "博客列表"]]
+   [:div {:class "start-body"}
+    [blog-list-component]]])
