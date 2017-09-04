@@ -8,8 +8,10 @@
 
 (defn blog-list-component []
   [:ul {:class "list blog-list"}
-   (for [blog blog-list]
-     ^{:key (str (.-title blog) ": " (.-path blog) )}
-     [:li {:class "blog-item"}
-      [:h2 {:class "blog-title"} (.-title blog)]
-      [:p {:class "blog-description"} (.-description blog)]])])
+    (map-indexed
+     (fn [idx blog]
+       ^{:key (str idx (.-title blog) (.-path blog))}
+       [:li {:class "blog-item"}
+         [:h2 {:class "blog-title"} (.-title blog)]
+         [:p {:class "blog-description"} (.-description blog)]])
+     blog-list)])

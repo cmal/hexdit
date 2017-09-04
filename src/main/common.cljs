@@ -8,7 +8,7 @@
              :show false}))
 
 (def start-window-options
-  (clj->js {:width 500
-            :height 650
+  (clj->js {:width 400
+            :height 550
             :resizable false
             :show false}))
