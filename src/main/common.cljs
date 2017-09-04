@@ -2,10 +2,7 @@
 
 (def app-window-options
   (clj->js {:width 960
-             :height 680
-             :minWidth 800
-             :minHeight 550
-             :show false}))
+            :height 680}))
 
 (def start-window-options
   (clj->js {:width 400

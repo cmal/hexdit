@@ -29,5 +29,5 @@
    [:div {:class "logo-warp"}
     [:img {:class "logo"
            :src "img/logo.svg"}]]
-   [menu-component menu-list]])
+   [menu menu-list]])
 

@@ -27,7 +27,7 @@
   (hook-browser-navigation!))
 
 (defmulti current-page #(@app-state :page))
-(defmethod current-page :blog [] 
+(defmethod current-page :blog []
   [blog])
 (defmethod current-page :start []
   [start])
