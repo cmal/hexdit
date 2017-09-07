@@ -6,7 +6,8 @@
 
 (defn blog []
   (let [blog-info @(rf/subscribe [:current-blog])]
-    [:div {:class "blog view"}
+    [:div {:class "blog view"
+           :data-info (.stringify js/JSON blog-info)}
       [sidebar-component]
       [:div {:class "content"}
         [article-list-component]]]))

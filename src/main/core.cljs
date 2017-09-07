@@ -1,5 +1,5 @@
 (ns main.core
-  (:require [main.ipc :refer [registry-ipc]]
+  (:require [main.ipc]
             [main.config :refer [get-config set-config]]
             [main.common :refer [app-window-options start-window-options]]))
 
@@ -24,5 +24,4 @@
                                 (.quit app)))
 (.on app "activate" #(.show @main-window))
 (.on app "ready" (fn []
-                   (create-window)
-                   (registry-ipc)))
+                   (create-window)))
