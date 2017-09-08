@@ -4,7 +4,7 @@
             [renderer.component.blog-list :refer [blog-list-component]]))
 
 (defn click-create-blog []
-  (secretary/dispatch! "/blog"))
+  (secretary/dispatch! "/create"))
 
 (defn start []
   [:div {:class "start view"}

@@ -6,7 +6,8 @@
               [goog.history.EventType :as EventType]
               [reagent.core :as reagent]
               [renderer.view.blog :refer [blog]]
-              [renderer.view.start :refer [start]]))
+              [renderer.view.start :refer [start]]
+              [renderer.view.create :refer [create]]))
 
 (def app-state (reagent/atom {}))
 
@@ -24,6 +25,8 @@
     (swap! app-state assoc :page :blog))
   (defroute "/start" []
     (swap! app-state assoc :page :start))
+  (defroute "/create" []
+    (swap! app-state assoc :page :create))
   (hook-browser-navigation!))
 
 (defmulti current-page #(@app-state :page))
@@ -31,4 +34,6 @@
   [blog])
 (defmethod current-page :start []
   [start])
+(defmethod current-page :create []
+  [create])
 

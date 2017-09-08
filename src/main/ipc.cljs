@@ -20,8 +20,8 @@
 (defipc "open-blog"
   (fn [event _]
     (let [main-window (.getFocusedWindow browser-window)]
-      (.setSize main-window
-                 (.-width app-window-options)
-                 (.-height app-window-options))
-      (.center main-window))))
+    (.setSize main-window
+               (.-width app-window-options)
+               (.-height app-window-options))
+    (.center main-window))))
 
