@@ -8,6 +8,7 @@
                  [figwheel "0.5.10"]
                  [reagent "0.6.1"]
                  [re-frame "0.10.1"]
+                 [antizer "0.2.2"]
                  [secretary "1.2.3"]
                  [class-names "0.1.1"]
                  [binaryage/devtools "0.9.4"]
@@ -15,7 +16,7 @@
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-less "1.7.5"]
             [lein-figwheel "0.5.10"]
-            [lein-cooper "1.2.2"]]
+            [lein-cooper "1.2.0"]]
 
   :clean-targets ^{:protect false} ["resources/main.js"
                                     "resources/public/js/renderer.js"

@@ -14,7 +14,7 @@
 (defn create-window []
   (reset! main-window (browser-window. start-window-options))
 
-  (.loadURL @main-window (str "file://" js/__dirname "/public/index.html#/start"))
+  (.loadURL @main-window (str "file://" js/__dirname "/public/index.html#/"))
   (.on @main-window "ready-to-show" (fn []
                                       (.show @main-window)
                                       (.focus @main-window)))

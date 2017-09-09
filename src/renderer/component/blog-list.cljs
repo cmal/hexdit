@@ -1,6 +1,7 @@
 (ns renderer.component.blog-list
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
+            [antizer.reagent :as ant]
             [secretary.core :as secretary]))
 
 (def electron (js/require "electron"))
@@ -14,12 +15,14 @@
   (secretary/dispatch! "/blog"))
 
 (defn blog-list-component []
-  [:ul {:class "list blog-list"}
+  [:div {:class "list-content"}
     (map-indexed
-     (fn [id blog]
-       ^{:key (str id (.-path blog))}
-       [:li {:class "blog-item"
-             :on-click #(click-blog-item blog)}
-         [:h2 {:class "blog-title"} (.-title blog)]
-         [:p {:class "blog-description"} (.-description blog)]])
-     blog-list)])
+      (fn [id blog-info]
+        ^{:key (str id (.-path blog-info))}
+        [ant/card {:class "blog-item"
+                   :noHovering true
+                   :bordered false
+                   :on-click #(click-blog-item)}
+          [:h2 {:class "blog-title"} (.-title blog-info)]
+          [:p {:class "blog-description"} (.-description blog-info)]])
+      blog-list)])
