@@ -22,15 +22,19 @@
       }
 
       .blog-control {
-        font-size: 16px;
+        font-size: 18px;
 
         .fa {
           margin-right: 10px;
           color: #999;
           cursor: pointer;
 
-          &:hover {
+          &.edit:hover {
             color: #0e83cd;
+          }
+
+          &.remove:hover {
+            color: #f04134;
           }
         }
       }
@@ -52,7 +56,7 @@
     .create-blog {
       width: inherit;
       height: 100%;
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .fa-plus::before {

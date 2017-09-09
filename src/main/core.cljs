@@ -12,7 +12,7 @@
 (def main-window (atom nil))
 
 (defn create-window []
-  (reset! main-window (browser-window. start-window-options))
+  (reset! main-window (browser-window. (clj->js start-window-options)))
 
   (.loadURL @main-window (str "file://" js/__dirname "/public/index.html#/"))
   (.on @main-window "ready-to-show" (fn []
