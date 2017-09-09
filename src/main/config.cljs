@@ -9,7 +9,7 @@
 (enable-console-print!)
 
 (def config-path
-  (.join path (.getPath app "home") 
+  (.join path (.getPath app "home")
               ".hexdit.json"))
 
 (def config

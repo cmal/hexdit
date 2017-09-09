@@ -18,10 +18,17 @@
      (aset event "returnValue" blog-list))))
 
 (defipc "open-blog"
-  (fn [event _]
+  (fn [_ _]
     (let [main-window (.getFocusedWindow browser-window)]
-    (.setSize main-window
-               (.-width app-window-options)
-               (.-height app-window-options))
-    (.center main-window))))
+      (.setSize main-window
+                 (.-width app-window-options)
+                 (.-height app-window-options))
+      (.center main-window))))
 
+(defipc "remove-blog"
+  (fn [event idx]
+    (let [blog-list (js->clj (get-config "blog-list"))
+          new-blog-list (clj->js (concat (subvec blog-list 0 idx)
+                         (subvec blog-list (inc idx))))]
+      (set-config "blog-list" new-blog-list)
+      (aset event "returnValue" new-blog-list))))
