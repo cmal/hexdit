@@ -2,10 +2,8 @@
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [antizer.reagent :as ant]
-            [secretary.core :as secretary]))
-
-(def electron (js/require "electron"))
-(def ipcRenderer (.-ipcRenderer electron))
+            [secretary.core :as secretary]
+            [renderer.ipc :as ipc]))
 
 (def modal-state (reagent/atom {:idx -1
                                 :visible false
@@ -23,16 +21,23 @@
 
 (defn open-blog [blog-info]
   (rf/dispatch-sync [:switch-blog blog-info])
-  (.send ipcRenderer "open-blog")
+  (ipc/open-blog)
   (secretary/dispatch! "/blog"))
+
+;; TODO
+(defn edit-blog [evt idx]
+  (.stopPropagation evt)
+  (secretary/dispatch! "/edit"))
 
 (defn remove-blog [evt idx]
   (.stopPropagation evt)
+  (swap! modal-state assoc :visible false)
   (rf/dispatch-sync [:remove-blog idx]))
 
-(defn blog-control-button [idx title]
+(defn blog-control [idx title]
   [:div {:class "blog-control"}
-   [:i {:class "edit fa fa-pencil"}]
+   [:i {:class "edit fa fa-pencil"
+        :on-click #(edit-blog % idx)}]
    [:i {:class "remove fa fa-trash"
         :on-click #(show-modal % idx title)}]])
 
@@ -44,7 +49,7 @@
              :noHovering true
              :bordered false
              :extra (reagent/as-element
-                      [blog-control-button idx title])
+                      [blog-control idx title])
              :on-click #(open-blog blog-info)}
       [:h2 {:class "blog-title"} title]
       [:p {:class "blog-description"} description]]))

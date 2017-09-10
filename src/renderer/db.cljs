@@ -1,15 +1,13 @@
 (ns renderer.db
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
+            [renderer.ipc :as ipc]
             [renderer.common :refer [menu-list]]))
-
-(def electron (js/require "electron"))
-(def ipcRenderer (.-ipcRenderer electron))
 
 (rf/reg-event-db
   :initialize
   (fn [_ _]
-    {:blog-list (js->clj (.sendSync ipcRenderer "get-blog-list"))
+    {:blog-list (ipc/get-blog-list)
      :current-blog nil
      :current-page (:id (first menu-list))}))
 
@@ -27,8 +25,7 @@
 (rf/reg-event-db
   :remove-blog
   (fn [db [_ idx]]
-    (let [blog-list (js->clj (.sendSync ipcRenderer "remove-blog" idx))]
-        (assoc db :blog-list blog-list))))
+    (assoc db :blog-list (ipc/remove-blog idx))))
 
 ;; ======== subscribe ========
 (rf/reg-sub
