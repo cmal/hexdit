@@ -31,15 +31,17 @@
 
 (defn remove-blog [evt idx]
   (.stopPropagation evt)
-  (swap! modal-state assoc :visible false)
-  (rf/dispatch-sync [:remove-blog idx]))
+  (rf/dispatch-sync [:remove-blog idx])
+  (swap! modal-state assoc :visible false))
 
 (defn blog-control [idx title]
   [:div {:class "blog-control"}
-   [:i {:class "edit fa fa-pencil"
-        :on-click #(edit-blog % idx)}]
-   [:i {:class "remove fa fa-trash"
-        :on-click #(show-modal % idx title)}]])
+    [ant/icon {:type "edit"
+              :class "edit"
+              :on-click #(edit-blog % idx)}]
+    [ant/icon {:type "delete"
+              :class "delete"
+              :on-click #(show-modal % idx title)}]])
 
 (defn blog-list-item [idx blog-info]
   (let [title (get blog-info "title")
