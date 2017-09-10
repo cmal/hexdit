@@ -40,8 +40,8 @@
      :id "renderer-dev"
      :compiler {:output-to "resources/public/js/renderer.js"
                 :output-dir "resources/public/js/renderer-out"
-                :source-map true
                 :asset-path "js/renderer-out"
+                :source-map true
                 :optimizations :none
                 :cache-analysis true
                 :main "dev.core"}}
@@ -49,17 +49,17 @@
      :id "main-release"
      :compiler {:output-to "resources/main.js"
                 :output-dir "resources/public/js/main-release-out"
-                :optimizations :advanced
-                :pretty-print true
+                :optimizations :simple
                 :cache-analysis true
                 :infer-externs true}}
     {:source-paths ["src/renderer"]
      :id "renderer-release"
      :compiler {:output-to "resources/public/js/renderer.js"
                 :output-dir "resources/public/js/renderer-release-out"
-                :source-map "resources/public/js/renderer.js.map"
-                :optimizations :advanced
-                :cache-analysis true
+                :asset-path "js/renderer-release-out"
+                :source-map true
+                :optimizations :none
+                :closure-defines {"goog.DEBUG" false}
                 :infer-externs true
                 :main "renderer.core"}}]}
   :figwheel {:http-server-root "public"
