@@ -2,27 +2,25 @@
 
 A Hexo blog editor built on electron and reagent
 
-## Running it
+## Running
 
 ```shell
-npm install electron-prebuilt -g # install electron binaries
+npm install electron-prebuilt -g
 
-lein cooper                      # compile cljs and start figwheel
-electron .                       # start electron from another terminal
+lein cooper
+electron .
 ```
 
 ## Releasing
 
 ```shell
 lein do clean, less once, cljsbuild once renderer-release, cljsbuild once main-release
-electron . # start electron to test that everything works
+electron .
 ```
 
-After that you can follow [distribution guide for the electron.](https://github.com/atom/electron/blob/master/docs/tutorial/application-distribution.md)
-
-The easiest way to package an electron app is by using [electron-packager](https://github.com/maxogden/electron-packager):
+## Building
 
 ```shell
-npm install electron-packager -g                                            # install electron packager
-electron-packager . HelloWorld --platform=darwin --arch=x64 --version=1.4.8 # package it!
+npm install electron-packager -g
+electron-packager . HelloWorld --platform=darwin --arch=x64
 ```
