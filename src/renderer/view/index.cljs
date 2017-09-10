@@ -17,5 +17,6 @@
       [ant/button {:type "primary"
                    :class "create-blog"
                    :on-click #(click-create-blog)}
-        [:i {:class "fa fa-plus"}
+        [ant/icon {:type "plus"
+                   :class "icon"}
           "新建博客"]]]])

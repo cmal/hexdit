@@ -7,5 +7,5 @@
   [ant/layout {:class "create layout"}
     [ant/layout-header {:class "create-header"}
      "添加博客"]
-    [ant/layout-content
+    [ant/layout-content {:class "create-content"}
       [create-blog-form-component]]])
