@@ -55,7 +55,7 @@
       [:p {:class "blog-description"} description]]))
 
 (defn blog-list-component []
-  [:div {:class "list-content"}
+  [:div {:class "blog-list"}
     (map-indexed
       (fn [idx blog-info]
         ^{:key (str idx (get blog-info "path"))}

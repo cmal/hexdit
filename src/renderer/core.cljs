@@ -6,7 +6,7 @@
             [renderer.router :refer [initial-routes current-page]]))
 
 (set! *warn-on-infer* true)
-(devtools/install!)
+(if ^boolean goog/DEBUG (devtools/install!))
 (enable-console-print!)
 
 (defn ^export main []
