@@ -29,10 +29,11 @@
   (.stopPropagation evt)
   (secretary/dispatch! "/edit"))
 
-(defn remove-blog [evt idx]
+(defn remove-blog [evt idx title]
   (.stopPropagation evt)
   (rf/dispatch-sync [:remove-blog idx])
-  (swap! modal-state assoc :visible false))
+  (swap! modal-state assoc :visible false)
+  (ant/message-success (str "『" title "』" "删除成功")))
 
 (defn blog-control [idx title]
   [:div {:class "blog-control"}
@@ -65,6 +66,6 @@
       @(rf/subscribe [:blog-list]))
     [ant/modal {:title "删除博客"
                :visible (:visible @modal-state)
-               :onOk #(remove-blog % (:idx @modal-state))
+               :onOk #(remove-blog % (:idx @modal-state) (:blog-title @modal-state))
                :onCancel #(hide-modal %)}
     [:p (str "是否删除博客『" (:blog-title @modal-state) "』？")]]])
