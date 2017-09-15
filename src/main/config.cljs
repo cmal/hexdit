@@ -9,8 +9,8 @@
 (enable-console-print!)
 
 (def config-path
-  (.join path (.getPath app "home")
-              ".hexdit.json"))
+  (.join path (.getPath app "userData")
+              "config.json"))
 
 (def config
   (.file nconf (clj->js {:file config-path})))

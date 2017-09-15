@@ -11,10 +11,11 @@
 
 (defipc "get-blog-list"
   (fn [event _]
-    (let [config (config/get-config "blog-list")
-         blog-list (if-not (= config nil) config [])]
+    (let [empty-list (clj->js [])
+          config (config/get-config "blog-list")
+          blog-list (if-not (= config nil) config empty-list)]
      (if (= config nil)
-       (config/set-config "blog-list" (clj->js [])))
+       (config/set-config "blog-list" empty-list))
      (aset event "returnValue" blog-list))))
 
 (defipc "open-blog"
