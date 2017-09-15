@@ -1,4 +1,4 @@
-(ns renderer.component.create-blog-form
+(ns renderer.component.blog-form
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [antizer.reagent :as ant]
@@ -7,7 +7,7 @@
 (def electron (js/require "electron"))
 (def dialog (.-dialog (.-remote electron)))
 
-(defn cancel-create []
+(defn on-cancel []
   (secretary/dispatch! "/"))
 
 (defn select-blog-path [evt form]
@@ -31,7 +31,7 @@
           (secretary/dispatch! "/")
           (ant/message-success "添加成功"))))))
 
-(defn create-form []
+(defn blog-form []
   (fn [props]
     (let [form (ant/get-form)]
       [ant/form {:class "create-blog-form"}
@@ -54,11 +54,11 @@
             [ant/input-text-area {:rows 5}])]
         [ant/form-item
           [:div {:class "create-button-group"}
-            [ant/button {:on-click #(cancel-create)}
+            [ant/button {:on-click #(on-cancel)}
               "返回"]
             [ant/button {:type "primary"
                          :on-click #(submit-form form)}
               "确认"]]]])))
 
-(defn create-blog-form-component []
-   (ant/create-form (create-form)))
+(defn blog-form-component []
+   (ant/create-form (blog-form)))
