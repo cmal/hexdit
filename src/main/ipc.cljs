@@ -32,3 +32,12 @@
                          (subvec blog-list (inc idx))))]
       (config/set-config "blog-list" new-blog-list)
       (aset event "returnValue" new-blog-list))))
+
+(defipc "add-blog"
+  (fn [event value]
+    (let [blog-list (js->clj (config/get-config "blog-list"))
+          new-blog (js->clj value)
+          new-blog-list (clj->js (conj blog-list new-blog))]
+      (config/set-config "blog-list" new-blog-list)
+      (aset event "returnValue" new-blog-list))))
+

@@ -33,7 +33,7 @@
   (.stopPropagation evt)
   (rf/dispatch-sync [:remove-blog idx])
   (swap! modal-state assoc :visible false)
-  (ant/message-success (str "『" title "』" "删除成功")))
+  (ant/message-success (str title " 删除成功")))
 
 (defn blog-control [idx title]
   [:div {:class "blog-control"}
@@ -68,4 +68,4 @@
                :visible (:visible @modal-state)
                :onOk #(remove-blog % (:idx @modal-state) (:blog-title @modal-state))
                :onCancel #(hide-modal %)}
-    [:p (str "是否删除博客『" (:blog-title @modal-state) "』？")]]])
+    [:p (str "是否删除博客 " (:blog-title @modal-state) " ？")]]])

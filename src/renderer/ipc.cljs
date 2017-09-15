@@ -11,3 +11,6 @@
 
 (defn remove-blog [idx]
   (js->clj (.sendSync ipcRenderer "remove-blog" idx)))
+
+(defn add-blog [blog]
+  (js->clj (.sendSync ipcRenderer "add-blog" blog)))

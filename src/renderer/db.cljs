@@ -27,6 +27,11 @@
   (fn [db [_ idx]]
     (assoc db :blog-list (ipc/remove-blog idx))))
 
+(rf/reg-event-db
+  :add-blog
+  (fn [db [_ blog]]
+    (assoc db :blog-list (ipc/add-blog blog))))
+
 ;; ======== subscribe ========
 (rf/reg-sub
   :blog-list

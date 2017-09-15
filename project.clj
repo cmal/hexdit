@@ -16,7 +16,7 @@
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-less "1.7.5"]
             [lein-figwheel "0.5.10"]
-            [lein-cooper "1.2.2"]]
+            [lein-cooper "1.2.1"]]
 
   :clean-targets ^{:protect false} ["resources/main.js"
                                     "resources/public/js/renderer.js"
