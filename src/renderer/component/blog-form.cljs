@@ -26,10 +26,13 @@
   (ant/validate-fields form
     (fn [error value]
       (if (= error nil)
-        (do
+        (let [old-count (count @(rf/subscribe [:blog-list]))]
           (rf/dispatch-sync [:add-blog value])
-          (secretary/dispatch! "/")
-          (ant/message-success "添加成功"))))))
+          (if-not (= (count @(rf/subscribe [:blog-list])) old-count)
+            (do
+              (secretary/dispatch! "/")
+              (ant/message-success "添加成功"))
+            (ant/message-error "添加失败，博客路径错误")))))))
 
 (defn blog-form []
   (fn [props]

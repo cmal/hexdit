@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.908"]
                  [figwheel "0.5.10"]
-                 [reagent "0.6.1"]
+                 [reagent "0.7.0"]
                  [re-frame "0.10.1"]
                  [antizer "0.2.2"]
                  [secretary "1.2.3"]
@@ -16,7 +16,7 @@
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-less "1.7.5"]
             [lein-figwheel "0.5.10"]
-            [lein-cooper "1.2.1"]]
+            [lein-cooper "1.2.2"]]
 
   :clean-targets ^{:protect false} ["resources/main.js"
                                     "resources/public/js/renderer.js"

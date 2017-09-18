@@ -14,3 +14,4 @@
 
 (defn add-blog [blog]
   (js->clj (.sendSync ipcRenderer "add-blog" blog)))
+

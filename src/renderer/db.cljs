@@ -4,12 +4,16 @@
             [renderer.ipc :as ipc]
             [renderer.common :refer [menu-list]]))
 
+(def blog-list (ipc/get-blog-list))
+(def current-blog nil)
+(def current-page (:id (first menu-list)))
+
 (rf/reg-event-db
   :initialize
   (fn [_ _]
-    {:blog-list (ipc/get-blog-list)
-     :current-blog nil
-     :current-page (:id (first menu-list))}))
+    {:blog-list blog-list
+     :current-blog current-blog
+     :current-page current-page}))
 
 ;; ======== event ========
 (rf/reg-event-db
