@@ -8,10 +8,12 @@
 
 (defn sider-menu-component []
   [ant/menu {:theme "dark"
-             :class "sider-menu"}
+             :class "sider-menu"
+             :defaultSelectedKeys (clj->js [(:id (first menu-info))])}
     (for [item menu-info]
       ^{:key (:id item)}
-      [ant/menu-item {:class "sider-menu-item"}
+      [ant/menu-item {:class "sider-menu-item"
+                      :key (:id item)}
         (reagent/as-element
           [:span
             [ant/icon {:type (:icon item)}]
