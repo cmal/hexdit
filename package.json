@@ -2,14 +2,6 @@
   "name": "hexdit",
   "version": "0.1.0",
   "main": "resources/main.js",
-  "scripts": {
-    "watch": "lein cooper",
-    "main": "lein cljsbuild auto main-dev",
-    "renderer": "lein figwheel renderer-dev",
-    "style": "lein less auto",
-    "clean": "lein do clean",
-    "build": "less once, cljsbuild once renderer-release, cljsbuild once main-release"
-  },
   "dependencies": {
     "nconf": "^0.8.4"
   },

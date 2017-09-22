@@ -65,4 +65,12 @@
   :figwheel {:http-server-root "public"
              :css-dirs ["resources/public/css"]
              :ring-handler tools.figwheel-middleware/app
-             :server-port 3449})
+             :server-port 3449}
+  :aliases {"main-dev" ["cljsbuild" "auto" "main-dev"]
+            "renderer-dev" ["figwheel" "renderer-dev"]
+            "style-dev" ["less" "auto"]
+            "release" ["do"
+                        ["clean"]
+                        ["cljsbuild" "once" "main-release"]
+                        ["cljsbuild" "once" "renderer-release"]
+                        ["less" "once"]]})
