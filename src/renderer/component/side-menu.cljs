@@ -1,4 +1,4 @@
-(ns renderer.component.side-menu
+(ns renderer.component.sider-menu
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [antizer.reagent :as ant]
@@ -6,18 +6,12 @@
 
 (def default-page @(rf/subscribe [:current-page]))
 
-(def style-menu {:background-color "#171f26"
-                 :height "100vh"})
-
-(def style-menu-item {:font-size "14px"
-                      :padding-left "30px"})
-
-(defn side-menu-component []
+(defn sider-menu-component []
   [ant/menu {:theme "dark"
-             :style style-menu}
+             :class "sider-menu"}
     (for [item menu-info]
       ^{:key (:id item)}
-      [ant/menu-item {:style style-menu-item}
+      [ant/menu-item {:class "sider-menu-item"}
         (reagent/as-element
           [:span
             [ant/icon {:type (:icon item)}]
