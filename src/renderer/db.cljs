@@ -2,11 +2,11 @@
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [renderer.ipc :as ipc]
-            [renderer.common :refer [menu-list]]))
+            [renderer.common :refer [menu-info]]))
 
 (def blog-list (ipc/get-blog-list))
 (def current-blog nil)
-(def current-page (:id (first menu-list)))
+(def current-page (:id (first menu-info)))
 
 (rf/reg-event-db
   :initialize

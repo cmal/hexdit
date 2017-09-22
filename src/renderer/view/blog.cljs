@@ -1,13 +1,14 @@
 (ns renderer.view.blog
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
-            [renderer.component.sidebar :refer [sidebar-component]]
-            [renderer.component.article-list :refer [article-list-component]]))
+            [antizer.reagent :as ant]
+            [renderer.component.side-menu :refer [side-menu-component]]))
 
 (defn blog []
-  (let [blog-info @(rf/subscribe [:current-blog])]
-    [:div {:class "blog view"
-           :data-info (.stringify js/JSON blog-info)}
-      [sidebar-component]
-      [:div {:class "content"}
-        [article-list-component]]]))
+  (let [blog-info (clj->js @(rf/subscribe [:current-blog]))]
+    [ant/layout {:class "blog layout"
+                 :data-info (.stringify js/JSON blog-info)}
+      [ant/layout-sider
+        [side-menu-component]]]))
+
+
