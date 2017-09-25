@@ -5,4 +5,7 @@
                  :icon "appstore-o"}
                 {:id "pages"
                  :label "页面"
-                 :icon "file"}])
+                 :icon "file"}
+                {:id "setting"
+                 :label "设置"
+                 :icon "setting"}])
