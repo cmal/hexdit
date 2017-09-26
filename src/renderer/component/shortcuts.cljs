@@ -32,7 +32,11 @@
   [:div {:class "shortcuts"}
     (for [shortcut shortcuts-option]
       ^{:key (:icon shortcut)}
-      [ant/icon {:class "icon"
-                 :type (:icon shortcut)
-                 :on-click (:action shortcut)}])])
+      [ant/tooltip {:placement "topLeft"
+                    :title (:text shortcut)
+                    :arrowPointAtCenter true
+                    :autoAdjustOverflow true}
+        [ant/icon {:class "icon"
+                   :type (:icon shortcut)
+                   :on-click (:action shortcut)}]])])
 
