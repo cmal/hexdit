@@ -2,25 +2,23 @@
 
 A Hexo blog editor built on electron and reagent
 
-## Running
+## Dependencies
 
 ```shell
 npm install electron-prebuilt -g
+npm install && lein deps
+```
 
+## Develop
+
+```shell
 lein cooper
-electron .
+electorn .
 ```
 
-## Releasing
+## Release
 
 ```shell
-lein do clean, less once, cljsbuild once renderer-release, cljsbuild once main-release
+lein release
 electron .
-```
-
-## Building
-
-```shell
-npm install electron-packager -g
-electron-packager . HelloWorld --platform=darwin --arch=x64
 ```
