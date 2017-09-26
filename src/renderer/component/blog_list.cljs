@@ -2,8 +2,7 @@
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [antizer.reagent :as ant]
-            [secretary.core :as secretary]
-            [renderer.ipc :as ipc]))
+            [secretary.core :as secretary]))
 
 (def modal-state (reagent/atom {:idx -1
                                 :visible false
@@ -21,7 +20,6 @@
 
 (defn open-blog [blog-info]
   (rf/dispatch-sync [:switch-blog blog-info])
-  (ipc/open-blog)
   (secretary/dispatch! "/blog"))
 
 ;; TODO

@@ -6,6 +6,9 @@
 (defn open-blog []
   (.send ipcRenderer "open-blog"))
 
+(defn close-blog []
+  (.send ipcRenderer "close-blog"))
+
 (defn get-blog-list []
   (js->clj (.sendSync ipcRenderer "get-blog-list")))
 

@@ -1,7 +1,7 @@
 (ns main.core
   (:require [main.ipc]
             [main.config :refer [get-config set-config]]
-            [main.common :refer [app-window-options start-window-options]]))
+            [main.common :refer [default-window-options]]))
 
 (set! *warn-on-infer* true)
 
@@ -12,7 +12,7 @@
 (def main-window (atom nil))
 
 (defn create-window []
-  (reset! main-window (browser-window. (clj->js start-window-options)))
+  (reset! main-window (browser-window. (clj->js default-window-options)))
 
   (.loadURL @main-window (str "file://" js/__dirname "/public/index.html#/"))
   (.on @main-window "ready-to-show" (fn []

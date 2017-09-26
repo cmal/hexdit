@@ -19,7 +19,11 @@
 (rf/reg-event-db
   :switch-blog
   (fn [db [_ blog]]
-    (assoc db :current-blog blog)))
+    (do
+      (if-not (= blog nil)
+        (ipc/open-blog)
+        (ipc/close-blog))
+      (assoc db :current-blog blog))))
 
 (rf/reg-event-db
   :switch-page

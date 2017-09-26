@@ -1,7 +1,7 @@
 (ns main.ipc
   (:require [main.config :as config]
             [main.hexo :as hexo]
-            [main.common :refer [app-window-options]]))
+            [main.common :refer [blog-window-options default-window-options]]))
 
 (def electron (js/require "electron"))
 (def browser-window (.-BrowserWindow electron))
@@ -23,8 +23,20 @@
   (fn [_ _]
     (let [main-window (.getFocusedWindow browser-window)]
       (.setSize main-window
-                (:width app-window-options)
-                (:height app-window-options))
+                (:width blog-window-options)
+                (:height blog-window-options))
+      (.setResizable main-window
+                     (:resizable blog-window-options))
+      (.center main-window))))
+
+(defipc "close-blog"
+  (fn [_ _]
+    (let [main-window (.getFocusedWindow browser-window)]
+      (.setSize main-window
+                (:width default-window-options)
+                (:height default-window-options))
+      (.setResizable main-window
+                     (:resizable default-window-options))
       (.center main-window))))
 
 (defipc "remove-blog"
