@@ -15,15 +15,22 @@
   (let [folder-path (get @(rf/subscribe [:current-blog]) "path")]
     (.openExternal shell (str "file://" folder-path))))
 
+(def toggle-preview (atom false))
+
+(defn start-preview [evt]
+  (let [style (.-style (.-target (.-nativeEvent evt)))]
+    (reset! toggle-preview (not @toggle-preview))
+    (aset style "color" (if @toggle-preview "green" nil))))
+
 (def shortcuts-option [{:icon "retweet"
                         :text "切换博客"
                         :action #(switch-blog)}
                        {:icon "folder"
                         :text "打开文件夹"
                         :action #(open-blog-folder)}
-                       {:icon "link"
+                       {:icon "video-camera"
                         :text "本地预览"
-                        :action #()}
+                        :action #(start-preview %)}
                        {:icon "upload"
                         :text "上传部署"
                         :action #()}])
