@@ -1,7 +1,5 @@
 target/
 resources/main.js
 resources/public/js
-resources/public/css/main.css
-figwheel_server.log
 
 node_modules/
