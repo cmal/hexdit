@@ -1,24 +1,18 @@
 # Hexdit
-
 A Hexo blog editor built on electron and reagent
 
-## Dependencies
-
-```shell
-npm install electron-prebuilt -g
-npm install && lein deps
+## How to Run
 ```
+npm install electron-prebuilt -g
+npm install shadow-cljs -g
+npm install
 
-## Develop
-
-```shell
-lein cooper
+npm run dev
 electorn .
 ```
 
 ## Release
-
-```shell
-lein release
-electron .
+```
+npm run build
+electron-packager . Hexdit --platform=darwin --arch=x64 --version=1.4.13
 ```
