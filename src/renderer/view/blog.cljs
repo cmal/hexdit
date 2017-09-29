@@ -6,7 +6,7 @@
             [renderer.component.content :refer [content-component]]))
 
 (defn blog []
-  (let [blog-info (clj->js @(rf/subscribe [:current-blog]))]
+  (let [blog-info @(rf/subscribe [:current-blog])]
     [ant/layout {:class "blog layout"}
       [ant/layout-sider {:width "150"}
         [sider-component]]

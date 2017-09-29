@@ -48,9 +48,9 @@
       (aset event "returnValue" new-blog-list))))
 
 (defipc "add-blog"
-  (fn [event info]
+  (fn [event blog]
     (let [blog-list (js->clj (config/get-config "blog-list"))
-          new-blog (js->clj info)
+          new-blog (js->clj blog)
           new-blog-list (clj->js (conj blog-list new-blog))]
       (if (hexo/check-pkg (get new-blog "path"))
         (do
@@ -58,3 +58,7 @@
           (aset event "returnValue" new-blog-list))
         (aset event "returnValue" (clj->js blog-list))))))
 
+;  TODO: make it better <2017-09-29, Ahonn Jiang> ;
+(defipc "preview-blog"
+  (fn [event blog]
+    (hexo/preview blog)))

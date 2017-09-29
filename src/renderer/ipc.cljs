@@ -18,3 +18,6 @@
 (defn add-blog [blog]
   (js->clj (.sendSync ipcRenderer "add-blog" blog)))
 
+(defn preview-blog [blog]
+  (.send ipcRenderer "preview-blog" blog))
+

@@ -2,7 +2,8 @@
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [antizer.reagent :as ant]
-            [secretary.core :as secretary]))
+            [secretary.core :as secretary]
+            [renderer.ipc :as ipc]))
 
 (def electron (js/require "electron"))
 (def shell (.-shell electron))
@@ -16,10 +17,10 @@
     (.openExternal shell (str "file://" folder-path))))
 
 (def toggle-preview (atom false))
-
 (defn start-preview [evt]
   (let [style (.-style (.-target (.-nativeEvent evt)))]
     (reset! toggle-preview (not @toggle-preview))
+    (ipc/preview-blog (clj->js @(rf/subscribe [:current-blog])))
     (aset style "color" (if @toggle-preview "green" nil))))
 
 (def shortcuts-option [{:icon "retweet"

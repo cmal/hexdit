@@ -22,7 +22,7 @@
   (rf/dispatch-sync [:switch-blog blog-info])
   (secretary/dispatch! "/blog"))
 
-;; TODO
+;  TODO: add edit blog <2017-09-10, Ahonn Jiang> ;
 (defn edit-blog [evt idx]
   (.stopPropagation evt)
   (secretary/dispatch! "/edit"))
