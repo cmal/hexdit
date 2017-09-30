@@ -3,20 +3,20 @@
             [re-frame.core :as rf]
             [app.renderer.events]
             [app.renderer.subs]
-            [app.renderer.routes :as routes :refer [current-page]]))
+            [app.renderer.routes :as routes :refer [pages]]))
 
 (enable-console-print!)
 
-(defn render []
+(defn render-root []
   (reagent/render
     [:div {:class "root"}
-      [current-page]]
+      [pages @(rf/subscribe [:current-page])]]
     (js/document.getElementById "app-container")))
 
 (defn start []
-  (routes/start!)
   (rf/dispatch-sync [:initialize])
-  (render))
+  (routes/start!)
+  (render-root))
 
 (defn init []
   (start))
