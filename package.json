@@ -1,7 +1,7 @@
 {
-  "name": "shadow-electorn-starter",
+  "name": "Hexdit",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Hexo blog editor built on electron and reagent",
   "main": "resources/main.js",
   "scripts": {
     "dev": "shadow-cljs watch main renderer",
