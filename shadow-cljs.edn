@@ -1,7 +1,9 @@
 ;; shadow-cljs configuration
 {:source-paths ["src"]
 
- :dependencies [[reagent "0.7.0"]]
+ :dependencies [[reagent "0.7.0"]
+                [re-frame "0.10.1"]
+                [secretary "1.2.3"]]
 
  :builds {:main {:target :node-script
                  :output-to "resources/main.js"
@@ -13,6 +15,5 @@
 
                      :modules {:renderer {:entries [app.renderer.core]}}
 
-                     :devtools {:before-load app.renderer.core/stop
-                                :after-load app.renderer.core/start}}}}
+                     :devtools {:after-load app.renderer.core/start}}}}
 
