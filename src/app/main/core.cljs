@@ -10,7 +10,8 @@
 (def main-window (atom nil))
 
 (defn create-window []
-  (reset! main-window (browser-window. options/launcher-window))
+  (reset! main-window (browser-window. (clj->js (merge options/launcher
+                                                       options/default))))
 
   (.loadURL @main-window (str "file://" js/__dirname "/public/index.html#/launcher"))
   (.on @main-window "ready-to-show" (fn []

@@ -1,4 +1,7 @@
-.logos img {
-  width: 100px;
-  margin-left: 5px;
+body {
+  line-height: 1.5;
+  background: #fff;
+  font-size: 14px;
+  font-family: PingFang SC, Microsoft YaHei, Helvetica Neue,Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }

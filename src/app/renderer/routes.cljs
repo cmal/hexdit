@@ -5,7 +5,7 @@
             [re-frame.core :as rf]
             [goog.events :as events]
             [goog.history.EventType :as EventType]
-            [app.renderer.pages.launcher :as launcher]))
+            [app.renderer.pages.launcher :refer [launcher]]))
 
 (defn hook-browser-navigation! []
   (doto (History.)
@@ -21,7 +21,7 @@
 
 (defmulti pages identity)
 (defmethod pages :launcher []
-  [launcher/main])
+  [launcher])
 (defmethod pages :default [])
 
 (defn start! []
