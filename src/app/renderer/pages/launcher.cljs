@@ -31,4 +31,4 @@
       [:h1 {:class title} "博客列表"]
       [icon {:type "plus"
              :class plus
-             :on-click #(println "add blog")}]]])
+             :on-click #(println "plug")}]]])

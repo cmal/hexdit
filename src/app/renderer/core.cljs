@@ -7,17 +7,14 @@
 
 (enable-console-print!)
 
-(defn render-root []
+(defn start []
   (reagent/render
     [:div {:class "root"}
       [pages @(rf/subscribe [:current-page])]]
     (js/document.getElementById "app-container")))
 
-(defn start []
+(defn init []
   (rf/dispatch-sync [:initialize])
   (routes/start!)
-  (render-root))
-
-(defn init []
   (start))
 
