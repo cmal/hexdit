@@ -1,6 +1,7 @@
 (ns app.renderer.events
   (:require [re-frame.core :as rf]
-            [app.renderer.db :as db]))
+            [app.renderer.db :as db]
+            [app.renderer.ipc :as ipc]))
 
 (def app-db db/default-db)
 
@@ -8,7 +9,7 @@
   :initialize
   (fn [_ _]
     ;  TODO: add get bloggers ipc function <2017-09-30, Ahonn Jiang> ;
-    (let [bloggers {}]
+    (let [bloggers (ipc/get-bloggers)]
       (merge app-db {:bloggers bloggers}))))
 
 (rf/reg-event-db

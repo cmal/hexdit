@@ -1,17 +1,20 @@
 (ns app.renderer.pages.launcher
   (:require [reagent.core :as reagent]
             [forest.macros :refer-macros [defstylesheet]]
-            [app.renderer.components.icon :refer [icon]]))
+            [re-frame.core :as rf]
+            [app.renderer.components.icon :refer [icon]]
+            [app.renderer.components.bloggers :refer [bloggers]]))
 
 (defstylesheet styles
-  [.warpper {:color "#fafafa"
-              :width "100%"
-              :height "100vh"}]
+  [.warpper {:background "#fafafa"
+             :width "100%"
+             :height "100vh"}]
   [.header {:height "70px"
-            :padding "25px 10px 10px"
+            :padding "25px 12px 10px"
             :display "flex"
             :align-items "baseline"
             :justify-content "space-between"
+            :color "#fafafa"
             :background "#2f3235"
             :box-sizing "border-box"
             :-webkit-app-region "drag"}]
@@ -27,8 +30,9 @@
 
 (defn launcher []
   [:div {:class warpper}
-    [:header {:class header}
-      [:h1 {:class title} "博客列表"]
-      [icon {:type "plus"
-             :class plus
-             :on-click #(println "plug")}]]])
+   [:header {:class header}
+    [:h1 {:class title} "博客列表"]
+    [icon {:type "plus"
+           :class plus
+           :on-click #(println @(rf/subscribe [:bloggers]))}]]
+   [bloggers]])

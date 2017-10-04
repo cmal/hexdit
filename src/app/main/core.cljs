@@ -1,19 +1,18 @@
 (ns app.main.core
-  (:require [app.main.options :as options]))
+  (:require [app.main.ipc :as ipc]
+            [app.main.options :as options]
+            [app.main.electorn :refer [app browser-window]]))
 
 (set! *warn-on-infer* true)
 
-(def electron       (js/require "electron"))
-(def app            (.-app electron))
-(def browser-window (.-BrowserWindow electron))
-
 (def main-window (atom nil))
+(def window-option (clj->js (merge options/launcher
+                                   options/default)))
 
 (defn create-window []
-  (reset! main-window (browser-window. (clj->js (merge options/launcher
-                                                       options/default))))
-
+  (reset! main-window (browser-window. window-option))
   (.loadURL @main-window (str "file://" js/__dirname "/public/index.html#/launcher"))
+
   (.on @main-window "ready-to-show" (fn []
                                       (.show @main-window)
                                       (.focus @main-window)))
@@ -23,4 +22,4 @@
   (.on app "window-all-closed" #(when-not (= js/process.platform "darwin")
                                   (.quit app)))
   (.on app "activate" #(.show @main-window))
-  (.on app "ready" (fn [] (create-window))))
+  (.on app "ready" #(create-window)))
