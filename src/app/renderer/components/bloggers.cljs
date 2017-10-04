@@ -2,6 +2,7 @@
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [forest.macros :refer-macros [defstylesheet]]
+            [app.renderer.electorn :refer [dialog]]
             [app.renderer.components.icon :refer [icon]]))
 
 (defstylesheet styles
@@ -29,6 +30,17 @@
                     :cursor "pointer"}]
   [.blog-ctrl-icon:hover {:color "#dd4c4f"}])
 
+(defn edit-blog [evt]
+  (.stopPropagation evt)
+  (js/console.log evt))
+
+(defn delete-blog [evt blog]
+  (let [title (get blog "title")]
+    (.stopPropagation evt)
+    (.showMessageBox dialog (clj->js {:type "warning"
+                                      :title "删除博客"
+                                      :message (str "确认删除" title "？")}))))
+
 (defn blog-item [blog]
   (let [title (get blog "title")
         description (get blog "description")]
@@ -39,9 +51,11 @@
       [:time {:class blog-date} "2017 年 10 月 03 日更新"]]
      [:div {:class blog-ctrl}
       [icon {:type "edit"
-             :class blog-ctrl-icon}]
+             :class blog-ctrl-icon
+             :on-click #(edit-blog %)}]
       [icon {:type "delete"
-             :class blog-ctrl-icon}]]]))
+             :class blog-ctrl-icon
+             :on-click #(delete-blog % blog)}]]]))
 
 (defn bloggers [blog-list]
   (let [bloggers @(rf/subscribe [:bloggers])]
