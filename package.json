@@ -16,6 +16,8 @@
     "ws": "^3.2.0"
   },
   "dependencies": {
-    "nconf": "^0.8.5"
+    "material-design-iconic-font": "^2.2.0",
+    "nconf": "^0.8.5",
+    "normalize.css": "^7.0.0"
   }
 }
