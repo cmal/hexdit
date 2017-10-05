@@ -1,13 +1,10 @@
 (ns app.main.ipc
   (:require [app.main.config :as config]
-            [app.main.electorn :refer [ipc-main]]
+            [app.main.electorn :refer [reg-ipc-event]]
             [app.main.utils :refer [index-of]]))
 
-;; define ipc function
-(defn defipc [ipcname ipcfn]
-  (.on ipc-main (name ipcname) ipcfn))
-
-(defipc :get-bloggers
+(reg-ipc-event
+  :get-bloggers
   (fn [evt _]
     (let [value (config/get-field "bloggers")
           bloggers (or value (array))]
@@ -15,7 +12,8 @@
         (config/set-field "bloggers" (array)))
       (aset evt "returnValue" bloggers))))
 
-(defipc :delete-blog
+(reg-ipc-event
+  :delete-blog
   (fn [evt uuid]
     (let [bloggers (js->clj (config/get-field "bloggers"))
           delete-index (index-of #(= (get % "uuid") uuid) bloggers)
