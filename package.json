@@ -12,6 +12,7 @@
   "author": "Ahonn Jiang <ahonn95@outlook.com>",
   "license": "ISC",
   "devDependencies": {
+    "electron-prebuilt": "^1.4.13",
     "source-map-support": "^0.4.18",
     "ws": "^3.2.0"
   },

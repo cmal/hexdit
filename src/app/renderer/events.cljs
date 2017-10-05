@@ -17,3 +17,7 @@
   (fn [db [_ page]]
     (merge db {:current-page page})))
 
+(rf/reg-event-db
+  :delete-blog
+  (fn [db [_ uuid]]
+    (merge db {:bloggers (ipc/delete-blog uuid)})))

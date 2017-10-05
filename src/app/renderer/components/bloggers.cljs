@@ -2,8 +2,9 @@
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [forest.macros :refer-macros [defstylesheet]]
-            [app.renderer.electorn :refer [dialog]]
-            [app.renderer.components.icon :refer [icon]]))
+            [app.renderer.utils.modal :refer [confirm]]
+            [app.renderer.components.icon :refer [icon]]
+            [app.renderer.ipc :as ipc]))
 
 (defstylesheet styles
   [.warpper {:color "#2f3235"}]
@@ -23,11 +24,13 @@
   [.blog-ctrl {:flex-grow "1"
                :padding "10px 5px"
                :display "flex"
-               :justify-content "flex-end"}]
+               :justify-content "flex-end"
+               :align-items "flex-start"}]
   [.blog-ctrl-icon {:font-size "18px"
-                    :margin "0 5px"
+                    :padding "5px"
                     :color "#666"
                     :cursor "pointer"}]
+  [.blog-ctrl-icon::before {:cursor "pointer"}]
   [.blog-ctrl-icon:hover {:color "#dd4c4f"}])
 
 (defn edit-blog [evt]
@@ -35,11 +38,12 @@
   (js/console.log evt))
 
 (defn delete-blog [evt blog]
-  (let [title (get blog "title")]
+  (let [title (get blog "title")
+        uuid (get blog "uuid")]
     (.stopPropagation evt)
-    (.showMessageBox dialog (clj->js {:type "warning"
-                                      :title "删除博客"
-                                      :message (str "确认删除" title "？")}))))
+    (confirm {:title "删除博客"
+              :message (str "确认删除" title "？")
+              :on-confirm #(rf/dispatch-sync [:delete-blog uuid])})))
 
 (defn blog-item [blog]
   (let [title (get blog "title")

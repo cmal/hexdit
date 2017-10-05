@@ -25,8 +25,8 @@
   [.plus {:position "relative"
           :top "5px"
           :margin-right "5px"
-          :font-size "34px"
-          :cursor "pointer"}])
+          :font-size "34px"}]
+  [.plus::before {:cursor "pointer"}])
 
 (defn launcher []
   [:div {:class warpper}

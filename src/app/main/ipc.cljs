@@ -1,6 +1,7 @@
 (ns app.main.ipc
   (:require [app.main.config :as config]
-            [app.main.electorn :refer [ipc-main]]))
+            [app.main.electorn :refer [ipc-main]]
+            [app.main.utils :refer [index-of]]))
 
 ;; define ipc function
 (defn defipc [ipcname ipcfn]
@@ -14,3 +15,11 @@
         (config/set-field "bloggers" (array)))
       (aset evt "returnValue" bloggers))))
 
+(defipc :delete-blog
+  (fn [evt uuid]
+    (let [bloggers (js->clj (config/get-field "bloggers"))
+          delete-index (index-of #(= (get % "uuid") uuid) bloggers)
+          new-bloggers (clj->js (concat (subvec bloggers 0 delete-index)
+                                        (subvec bloggers (inc delete-index))))]
+      (config/set-field "bloggers" new-bloggers)
+      (aset evt "returnValue" new-bloggers))))
