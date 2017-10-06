@@ -2,9 +2,19 @@
 
 (def electron (js/require "electron"))
 (def app (.-app electron))
-(def browser-window (.-BrowserWindow electron))
 
+;; BrowserWindow
+(def browser-window (.-BrowserWindow electron))
+(defn set-window-option [option]
+  (let [window (.getFocusedWindow browser-window)
+        width  (:width option)
+        height (:height option)
+        resizable (:resizable option)]
+    (.setSize window width height)
+    (.setResizable window resizable)
+    (.center window)))
+
+;; ipcMain
 (def ipc-main (.-ipcMain electron))
-;; register ipc event
 (defn reg-ipc-event [ipcname ipcfn]
   (.on ipc-main (name ipcname) ipcfn))

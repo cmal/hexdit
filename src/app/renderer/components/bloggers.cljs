@@ -8,12 +8,13 @@
             [app.renderer.ipc :as ipc]))
 
 (defstylesheet styles
-  [.warpper {:color "#2f3235"}]
-  [.blog-warpper {:padding "10px 12px"
+  [.warpper {:color "#2f3235"
+             :padding-top "70px"}]
+  [.blog-warpper {:padding "10px"
                   :display "flex"
+                  :border-left "4px solid #717b87"
                   :border-bottom "1px solid #ebebeb"}]
-  [.blog-warpper:hover {:padding-left "8px"
-                        :border-left "4px solid #dd4c4f"}]
+  [.blog-warpper:hover {:border-left "4px solid #dd4c4f"}]
   [.blog-info {:flex-grow "4"}]
   [.blog-title {:margin "0"
                 :background "#fafafa"
@@ -21,7 +22,8 @@
                 :font-weight "normal"}]
   [.blog-description {:margin "0"
                       :font-size "14px"}]
-  [.blog-date {:font-size "12px"}]
+  [.blog-date {:font-size "12px"
+               :color "#717b87"}]
   [.blog-ctrl {:flex-grow "1"
                :padding "10px 5px"
                :display "flex"
@@ -29,7 +31,7 @@
                :align-items "flex-start"}]
   [.blog-ctrl-icon {:font-size "18px"
                     :padding "5px"
-                    :color "#666"
+                    :color "#717b87"
                     :cursor "pointer"}]
   [.blog-ctrl-icon::before {:cursor "pointer"}]
   [.blog-ctrl-icon:hover {:color "#dd4c4f"}])

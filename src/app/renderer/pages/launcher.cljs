@@ -10,10 +10,12 @@
              :width "100%"
              :height "100vh"}]
   [.header {:height "70px"
+            :width "100%"
             :padding "25px 12px 10px"
             :display "flex"
             :align-items "baseline"
             :justify-content "space-between"
+            :position "fixed"
             :color "#fafafa"
             :background "#2f3235"
             :box-sizing "border-box"

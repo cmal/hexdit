@@ -20,7 +20,11 @@
 (rf/reg-event-db
   :current-blog
   (fn [db [_ blog]]
-    (merge db {:current-blog blog})))
+    (do
+      (if (nil? blog)
+        (ipc/close-blog)
+        (ipc/open-blog))
+      (merge db {:current-blog blog}))))
 
 (rf/reg-event-db
   :delete-blog

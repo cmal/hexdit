@@ -1,6 +1,7 @@
 (ns app.main.ipc
   (:require [app.main.config :as config]
-            [app.main.electorn :refer [reg-ipc-event]]
+            [app.main.options :as options]
+            [app.main.electorn :refer [reg-ipc-event set-window-option]]
             [app.main.utils :refer [index-of]]))
 
 (reg-ipc-event
@@ -11,6 +12,16 @@
       (if (not value)
         (config/set-field "bloggers" (array)))
       (aset evt "returnValue" bloggers))))
+
+(reg-ipc-event
+  :open-blog
+  (fn [evt]
+    (set-window-option options/main)))
+
+(reg-ipc-event
+  :close-blog
+  (fn [evt]
+    (set-window-option options/launcher)))
 
 (reg-ipc-event
   :delete-blog
