@@ -18,6 +18,11 @@
     (merge db {:current-page page})))
 
 (rf/reg-event-db
+  :current-blog
+  (fn [db [_ blog]]
+    (merge db {:current-blog blog})))
+
+(rf/reg-event-db
   :delete-blog
   (fn [db [_ uuid]]
     (merge db {:bloggers (ipc/delete-blog uuid)})))

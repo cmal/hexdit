@@ -10,3 +10,8 @@
   :current-page
   (fn [db]
     (:current-page db)))
+
+(rf/reg-sub
+  :current-blog
+  (fn [db]
+    (:current-blog db)))

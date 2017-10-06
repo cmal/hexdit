@@ -1,6 +1,7 @@
 (ns app.renderer.components.bloggers
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
+            [secretary.core :as secretary]
             [forest.macros :refer-macros [defstylesheet]]
             [app.renderer.utils.modal :refer [confirm]]
             [app.renderer.components.icon :refer [icon]]
@@ -45,10 +46,16 @@
               :message (str "确认删除" title "？")
               :on-confirm #(rf/dispatch-sync [:delete-blog uuid])})))
 
+(defn open-blog [evt blog]
+  (.stopPropagation evt)
+  (rf/dispatch-sync [:current-blog blog])
+  (secretary/dispatch! "/blog"))
+
 (defn blog-item [blog]
   (let [title (get blog "title")
         description (get blog "description")]
-    [:div {:class blog-warpper}
+    [:div {:class blog-warpper
+           :on-click #(open-blog % blog)}
      [:div {:class blog-info}
       [:h2 {:class blog-title} title]
       [:p {:class blog-description} description]
