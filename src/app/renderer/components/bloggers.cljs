@@ -12,6 +12,7 @@
              :padding-top "70px"}]
   [.blog-warpper {:padding "10px"
                   :display "flex"
+                  :background "#fafafa"
                   :border-left "4px solid #717b87"
                   :border-bottom "1px solid #ebebeb"}]
   [.blog-warpper:hover {:border-left "4px solid #dd4c4f"}]

@@ -1,7 +1,10 @@
 (ns app.renderer.electorn)
 
 (def electron (js/require "electron"))
-(def dialog (.-dialog (.-remote electron)))
+(def remote (.-remote electron))
+
+(def dialog (.-dialog remote))
+(def tray (.-Tray remote))
 
 (def ipc-renderer (.-ipcRenderer electron))
 (defn ipc-send-sync [event & [params]]

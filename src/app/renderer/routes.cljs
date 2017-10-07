@@ -7,7 +7,8 @@
             [goog.events :as events]
             [goog.history.EventType :as EventType]
             [app.renderer.pages.launcher :refer [launcher]]
-            [app.renderer.pages.blog :refer [blog]]))
+            [app.renderer.pages.blog :refer [blog]]
+            [app.renderer.pages.create :refer [create]]))
 
 (def app-state (reagent/atom {}))
 
@@ -23,7 +24,9 @@
   (defroute "/launcher" []
     (rf/dispatch-sync [:current-page :launcher]))
   (defroute "/blog" []
-    (rf/dispatch-sync [:current-page :blog])))
+    (rf/dispatch-sync [:current-page :blog]))
+  (defroute "/create" []
+    (rf/dispatch-sync [:current-page :create])))
 
 (defmulti current-page
   (fn []
@@ -32,6 +35,8 @@
   [launcher])
 (defmethod current-page :blog []
   [blog])
+(defmethod current-page :create []
+  [create])
 (defmethod current-page :default [])
 
 (defn initialize []

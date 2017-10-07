@@ -1,10 +1,12 @@
 (ns app.renderer.core
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
+            [devtools.core :as devtools]
             [app.renderer.events]
             [app.renderer.subs]
             [app.renderer.routes :as routes :refer [current-page]]))
 
+(devtools/install!)
 (enable-console-print!)
 
 (defn start []
