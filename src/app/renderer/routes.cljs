@@ -8,9 +8,10 @@
             [goog.history.EventType :as EventType]
             [app.renderer.pages.launcher :refer [launcher]]
             [app.renderer.pages.blog :refer [blog]]
-            [app.renderer.pages.create :refer [create]]))
+            [app.renderer.pages.create :refer [create]]
+            [app.renderer.pages.edit :refer [edit]]))
 
-(def app-state (reagent/atom {}))
+(def params (reagent/atom {}))
 
 (defn hook-browser-navigation! []
   (doto (History.)
@@ -26,7 +27,10 @@
   (defroute "/blog" []
     (rf/dispatch-sync [:current-page :blog]))
   (defroute "/create" []
-    (rf/dispatch-sync [:current-page :create])))
+    (rf/dispatch-sync [:current-page :create]))
+  (defroute "/edit" [query-params]
+    (rf/dispatch-sync [:current-page :edit])
+    (reset! params query-params)))
 
 (defmulti current-page
   (fn []
@@ -37,6 +41,8 @@
   [blog])
 (defmethod current-page :create []
   [create])
+(defmethod current-page :edit []
+  [edit @params])
 (defmethod current-page :default [])
 
 (defn initialize []

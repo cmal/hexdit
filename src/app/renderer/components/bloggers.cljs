@@ -37,9 +37,11 @@
   [.blog-ctrl-icon::before {:cursor "pointer"}]
   [.blog-ctrl-icon:hover {:color "#dd4c4f"}])
 
-(defn edit-blog [evt]
+(defn edit-blog [evt blog]
   (.stopPropagation evt)
-  (js/console.log evt))
+  (println (str "/edit?" (secretary/encode-query-params blog)))
+  (secretary/dispatch! (str "/edit?"
+                            (secretary/encode-query-params blog))))
 
 (defn delete-blog [evt blog]
   (let [title (get blog "title")
@@ -66,7 +68,7 @@
      [:div {:class blog-ctrl}
       [icon {:type "edit"
              :class blog-ctrl-icon
-             :on-click #(edit-blog %)}]
+             :on-click #(edit-blog % blog)}]
       [icon {:type "delete"
              :class blog-ctrl-icon
              :on-click #(delete-blog % blog)}]]]))
