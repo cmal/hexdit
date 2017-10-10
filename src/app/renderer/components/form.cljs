@@ -6,18 +6,26 @@
   [.wrapper {:padding-top "70px"}]
   [.form-item {:margin-bottom "20px"}])
 
-(def state (reagent/atom {:title nil}))
+(def fields (reagent/atom {:title ""
+                           :path ""
+                           :description ""}))
 
-(defn will-mount [this value]
-  (js/console.log this value))
+(defn- swap-fields [evt ky]
+  (swap! fields assoc ky (-> evt .-target .-value)))
+
+(defn- will-mount [this value]
+  (when-not (nil? value)
+    (reset! fields value)))
 
 (defn- render []
   [:form {:class wrapper}
    [:div {:class form-item}
-    [:input {:type "text"}]]])
+    [:input {:type "text"
+             :value (@fields :title)
+             :on-cheeeee#(swap-fields % :title)}]]])
+riginal text
 
-(defn form [{:keys [value]}]
-  (let [value (clj->js (or value {}))]
-    (reagent/create-class
-      {:component-will-mount #(will-mount % value)
-       :reagent-render #(render)})))
+(defn form [value]
+  (reagent/create-class
+    {:component-will-mount #(will-mount % value)
+     :reagent-render #(render)}))

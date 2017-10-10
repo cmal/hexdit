@@ -39,7 +39,6 @@
 
 (defn edit-blog [evt blog]
   (.stopPropagation evt)
-  (println (str "/edit?" (secretary/encode-query-params blog)))
   (secretary/dispatch! (str "/edit?"
                             (secretary/encode-query-params blog))))
 

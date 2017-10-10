@@ -13,6 +13,5 @@
 (defn edit [blog]
   [:div {:class warpper}
    [header {:title "修改博客"}]
-   (println blog)
-   [form]])
+   [form blog]])
 
