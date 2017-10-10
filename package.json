@@ -5,8 +5,9 @@
   "main": "resources/main.js",
   "scripts": {
     "dev": "shadow-cljs watch main renderer",
-    "build": "shadow-cljs compile main renderer",
-    "clean": "rm -rf resources/public/js && rm -rf target"
+    "release": "shadow-cljs compile main renderer",
+    "clean": "rm -rf resources/public/js && rm -rf target",
+    "build:mac": "electron-packager . Hexdit --platform=darwin --arch=x64 --out build --ignore=node_modules --ignore=src --overwrite --rebuild"
   },
   "keywords": [],
   "author": "Ahonn Jiang <ahonn95@outlook.com>",
