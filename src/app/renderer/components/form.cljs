@@ -22,8 +22,7 @@
    [:div {:class form-item}
     [:input {:type "text"
              :value (@fields :title)
-             :on-cheeeee#(swap-fields % :title)}]]])
-riginal text
+             :on-change #(swap-fields % :title)}]]])
 
 (defn form [value]
   (reagent/create-class
