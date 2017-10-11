@@ -1,6 +1,7 @@
 (ns app.renderer.utils.modal
   (:require [app.renderer.electorn :refer [dialog]]))
 
+(def show-open-dialog (.-showOpenDialog dialog))
 (def show-message-box (.-showMessageBox dialog))
 
 (defn confirm [{:keys [title message on-confirm on-cancel]}]
@@ -15,3 +16,6 @@
                           (on-confirm)
                           (on-cancel))))))
 
+(defn open-directory [{:keys [callback]}]
+  (show-open-dialog (clj->js {:properties ["openDirectory"]})
+                    callback))

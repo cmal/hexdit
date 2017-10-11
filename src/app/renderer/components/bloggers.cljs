@@ -3,7 +3,7 @@
             [re-frame.core :as rf]
             [secretary.core :as secretary]
             [forest.macros :refer-macros [defstylesheet]]
-            [app.renderer.utils.modal :refer [confirm]]
+            [app.renderer.utils.modal :as modal]
             [app.renderer.components.icon :refer [icon]]
             [app.renderer.ipc :as ipc]))
 
@@ -46,9 +46,9 @@
   (let [title (get blog "title")
         uuid (get blog "uuid")]
     (.stopPropagation evt)
-    (confirm {:title "删除博客"
-              :message (str "确认删除" title "？")
-              :on-confirm #(rf/dispatch-sync [:delete-blog uuid])})))
+    (modal/confirm {:title "删除博客"
+                    :message (str "确认删除" title "？")
+                    :on-confirm #(rf/dispatch-sync [:delete-blog uuid])})))
 
 (defn open-blog [evt blog]
   (.stopPropagation evt)
