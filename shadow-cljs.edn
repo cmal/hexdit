@@ -5,7 +5,8 @@
                 [re-frame "0.10.1"]
                 [secretary "1.2.3"]
                 [forest "0.2.1"]
-                [binaryage/devtools "0.9.4"]]
+                [binaryage/devtools "0.9.4"]
+                [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]]
 
  :builds {:main {:target :node-script
                  :output-to "resources/main.js"

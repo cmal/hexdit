@@ -8,7 +8,6 @@
 (rf/reg-event-db
   :initialize
   (fn [_ _]
-    ;  TODO: add get bloggers ipc function <2017-09-30, Ahonn Jiang> ;
     (let [bloggers (ipc/get-bloggers)]
       (merge app-db {:bloggers bloggers}))))
 
@@ -27,6 +26,19 @@
       (merge db {:current-blog blog}))))
 
 (rf/reg-event-db
+  :add-blog
+  (fn [db [_ blog]]
+    (let [bloggers (ipc/add-blog blog)]
+      (merge db {:bloggers bloggers}))))
+
+(rf/reg-event-db
+  :update-blog
+  (fn [db [_ blog]]
+    (let [bloggers (ipc/update-blog blog)]
+      (merge db {:bloggers bloggers}))))
+
+(rf/reg-event-db
   :delete-blog
   (fn [db [_ uuid]]
-    (merge db {:bloggers (ipc/delete-blog uuid)})))
+    (let [bloggers (ipc/delete-blog uuid)]
+      (merge db {:bloggers bloggers}))))
