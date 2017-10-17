@@ -6,6 +6,7 @@
                 [secretary "1.2.3"]
                 [forest "0.2.1"]
                 [binaryage/devtools "0.9.4"]
+                [cljsjs/moment "2.17.1-1"]
                 [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]]
 
  :builds {:main {:target :node-script

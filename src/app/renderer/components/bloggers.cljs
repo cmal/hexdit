@@ -1,5 +1,6 @@
 (ns app.renderer.components.bloggers
-  (:require [reagent.core :as reagent]
+  (:require cljsjs.moment
+            [reagent.core :as reagent]
             [re-frame.core :as rf]
             [secretary.core :as secretary]
             [forest.macros :refer-macros [defstylesheet]]
@@ -57,13 +58,15 @@
 
 (defn blog-item [blog]
   (let [title (get blog "title")
-        description (get blog "description")]
+        description (get blog "description")
+        date (get blog "date")
+        date-str (.format (js/moment date) "YYYY/MM/DD")]
     [:div {:class blog-warpper
            :on-click #(open-blog % blog)}
      [:div {:class blog-info}
       [:h2 {:class blog-title} title]
       [:p {:class blog-description} description]
-      [:time {:class blog-date} "2017 年 10 月 03 日更新"]]
+      [:time {:class blog-date} (str "更新时间: " date-str)]]
      [:div {:class blog-ctrl}
       [icon {:type "edit"
              :class blog-ctrl-icon

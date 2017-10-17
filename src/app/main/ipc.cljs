@@ -18,7 +18,8 @@
   (fn [evt blog]
     (let [bloggers (js->clj (config/get-field "bloggers"))
           new-uuid (make-uuid)
-          new-blog (merge (js->clj blog) {"uuid" new-uuid})
+          new-blog (merge (js->clj blog) {"uuid" new-uuid
+                                          "date" (.now js/Date)})
           new-bloggers (clj->js (conj bloggers new-blog))]
       (config/set-field "bloggers" new-bloggers)
       (aset evt "returnValue" new-bloggers))))
