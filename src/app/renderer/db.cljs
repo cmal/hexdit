@@ -3,5 +3,6 @@
 (def default-db
   {:bloggers {}
    :current-blog nil
-   :current-page nil})
+   :current-page nil
+   :blog-view nil})
 

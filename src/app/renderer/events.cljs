@@ -1,15 +1,18 @@
 (ns app.renderer.events
   (:require [re-frame.core :as rf]
             [app.renderer.db :as db]
-            [app.renderer.ipc :as ipc]))
+            [app.renderer.ipc :as ipc]
+            [app.renderer.constants :as constants]))
 
 (def app-db db/default-db)
 
 (rf/reg-event-db
   :initialize
   (fn [_ _]
-    (let [bloggers (ipc/get-bloggers)]
-      (merge app-db {:bloggers bloggers}))))
+    (let [bloggers (ipc/get-bloggers)
+          blog-view (:id (first constants/menu))]
+      (merge app-db {:bloggers bloggers
+                     :blog-view blog-view}))))
 
 (rf/reg-event-db
   :current-page
@@ -42,3 +45,8 @@
   (fn [db [_ uuid]]
     (let [bloggers (ipc/delete-blog uuid)]
       (merge db {:bloggers bloggers}))))
+
+(rf/reg-event-db
+  :blog-view
+  (fn [db [_ view]]
+    (merge db {:blog-view view})))

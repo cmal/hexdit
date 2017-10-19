@@ -15,3 +15,8 @@
   :current-blog
   (fn [db]
     (:current-blog db)))
+
+(rf/reg-sub
+  :blog-view
+  (fn [db]
+    (:blog-view db)))
