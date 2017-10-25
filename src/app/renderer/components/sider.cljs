@@ -9,6 +9,8 @@
 (defstylesheet styles
   [.wrapper {:width "180px"
              :height "100vh"
+             :position "fixed"
+             :left "0"
              :background "#2f3235"}]
   [.drag-region {:height "50px"
                  :-webkit-app-region "drag"}]
