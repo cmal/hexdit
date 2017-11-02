@@ -4,6 +4,11 @@
 (def show-open-dialog (.-showOpenDialog dialog))
 (def show-message-box (.-showMessageBox dialog))
 
+(defn message [{:keys [title message]}]
+  (show-message-box (clj->js {:type "warning"
+                              :title title
+                              :message message})))
+
 (defn confirm [{:keys [title message on-confirm on-cancel]}]
   (let [on-confirm (or on-confirm #())
         on-cancel (or on-cancel #())]

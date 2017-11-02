@@ -57,12 +57,16 @@
   (secretary/dispatch! "/launcher"))
 
 (defn- confirm [evt]
-  (let [is-update (contains? @fields :uuid)
+  (let [blog-count (count @(rf/subscribe [:bloggers]))
+        is-update (contains? @fields :uuid)
         blog (clj->js @fields)]
     (if is-update
       (rf/dispatch-sync [:update-blog blog])
       (rf/dispatch-sync [:add-blog blog]))
-    (secretary/dispatch! "/launcher")))
+    (if (= blog-count (count @(rf/subscribe [:bloggers])))
+      (modal/message {:title "操作失败"
+                      :message "博客路径错误"})
+      (secretary/dispatch! "/launcher"))))
 
 ;; children components
 (defn- form-input [{:keys [id text auto-focus on-focus]}]
