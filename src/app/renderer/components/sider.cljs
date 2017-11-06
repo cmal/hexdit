@@ -28,15 +28,15 @@
                :text-align "center"}]
   [.active-item {:background "#dd4c4f"}])
 
-(defn selected? [item]
+(defn- selected? [item]
   (let [blog-view @(rf/subscribe [:blog-view])]
     (= blog-view (:id item))))
 
-(defn select-item [item]
+(defn- select-item [item]
   (let [view (:id item)]
     (rf/dispatch-sync [:blog-view view])))
 
-(defn menu-item [item]
+(defn- menu-item [item]
   [:div {:class (class-names item-wrapper
                              {active-item (selected? item)})
          :on-click #(select-item item)}
@@ -44,13 +44,23 @@
           :class item-icon}]
    [:span (:text item)]])
 
-(defn menu []
+(defn- menu []
   [:div {:class menu-wrapper}
    (for [item constants/menu]
      ^{:key (:id item)}
      [menu-item item])])
 
-(defn sider []
+(defn- did-mount []
+  (let [first-menu (first constants/menu)]
+    (select-item first-menu)
+    (rf/dispatch-sync [(:id first-menu)])))
+
+(defn- render []
   [:nav {:class wrapper}
    [:div {:class drag-region}]
    [menu]])
+
+(defn sider []
+  (reagent/create-class
+    {:component-did-mount did-mount
+     :reagent-render render}))

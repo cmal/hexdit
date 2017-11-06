@@ -1,5 +1,6 @@
 (ns app.renderer.pages.blog
   (:require [reagent.core :as reagent]
+            [re-frame.core :as rf]
             [forest.macros :refer-macros [defstylesheet]]
             [app.renderer.components.sider :refer [sider]]
             [app.renderer.components.markdown :refer [markdown]]))
@@ -13,3 +14,4 @@
   [:div {:class warpper}
    [sider]
    [markdown]])
+

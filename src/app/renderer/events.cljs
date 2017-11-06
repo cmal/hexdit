@@ -23,10 +23,10 @@
   :current-blog
   (fn [db [_ blog]]
     (do
+      (merge db {:current-blog blog})
       (if (nil? blog)
         (ipc/close-blog)
-        (ipc/open-blog))
-      (merge db {:current-blog blog}))))
+        (ipc/open-blog (clj->js blog))))))
 
 (rf/reg-event-db
   :add-blog
@@ -50,3 +50,9 @@
   :blog-view
   (fn [db [_ view]]
     (merge db {:blog-view view})))
+
+(rf/reg-event-db
+  :blog-posts
+  (fn [db]
+    (let [posts (ipc/get-blog-posts)]
+      (merge db {:blog-post posts}))))

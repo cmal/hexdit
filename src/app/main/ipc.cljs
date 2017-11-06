@@ -1,7 +1,8 @@
 (ns app.main.ipc
   (:require [app.main.config :as config]
             [app.main.options :as options]
-            [app.main.electorn :refer [reg-ipc-event set-window-option]]
+            [app.main.electorn :refer [reg-ipc-event
+                                       set-window-option]]
             [app.main.utils :refer [index-of make-uuid]]
             [app.main.hexo :as hexo]))
 
@@ -22,7 +23,7 @@
           new-blog (merge (js->clj blog) {"uuid" new-uuid
                                           "date" (.now js/Date)})
           new-bloggers (clj->js (conj bloggers new-blog))]
-      (if (hexo/check-pkg (get new-blog "path"))
+      (if (hexo/check-pkg new-blog)
         (do
           (config/set-field "bloggers" new-bloggers)
           (aset evt "returnValue" new-bloggers))
@@ -52,11 +53,18 @@
 
 (reg-ipc-event
   :open-blog
-  (fn [evt]
+  (fn [evt blog]
+    (hexo/load blog)
     (set-window-option options/main)))
 
 (reg-ipc-event
   :close-blog
   (fn [evt]
     (set-window-option options/launcher)))
+
+(reg-ipc-event
+  :get-blog-posts
+  (fn [evt]
+    (let [posts (hexo/get-posts)]
+      (aset evt "returnValue" (clj->js posts)))))
 

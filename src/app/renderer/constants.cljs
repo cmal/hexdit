@@ -1,11 +1,11 @@
 (ns app.renderer.constants)
 
-(def menu [{:id :posts
+(def menu [{:id :blog-posts
             :icon "assignment"
             :text "文章"}
-           {:id :pages
+           {:id :blog-pages
             :icon "file-text"
             :text "页面"}
-           {:id :trash
+           {:id :blog-trash
             :icon "delete"
             :text "回收站"}])

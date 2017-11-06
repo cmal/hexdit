@@ -20,3 +20,8 @@
   :blog-view
   (fn [db]
     (:blog-view db)))
+
+(rf/reg-sub
+  :blog-posts
+  (fn [db]
+    (:blog-post db)))

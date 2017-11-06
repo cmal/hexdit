@@ -4,8 +4,9 @@
             [app.renderer.components.icon :refer [icon]]))
 
 (defstylesheet style
-  [.warpper {:width "100%"
+  [.warpper {:width "259px"
              :height "50px"
+             :position "fixed"
              :background "#f9f9f9"
              :border-bottom "1px solid #dedede"
              :-webkit-app-region "drag"}]

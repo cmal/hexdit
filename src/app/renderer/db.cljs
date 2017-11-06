@@ -4,5 +4,6 @@
   {:bloggers {}
    :current-blog nil
    :current-page nil
-   :blog-view nil})
+   :blog-view nil
+   :blog-posts {}})
 
