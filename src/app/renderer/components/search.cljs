@@ -35,12 +35,17 @@
                :padding-top "13px"
                :color "#a0a0a0"}])
 
+(defn- change-search-query [props evt]
+  (let [value (-> evt .-target .-value)
+        on-change (:on-change props)]
+    (on-change value)))
 
-(defn search []
+(defn search [props]
   [:div {:class warpper}
    [:div {:class search-wrapper}
     [:input {:class search-input
-             :placeholder "搜索"}]
+             :placeholder "搜索"
+             :on-change #(change-search-query props %)}]
     [icon {:type "search"
            :class search-icon}]]
    [:button {:class edit-button}
