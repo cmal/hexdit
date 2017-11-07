@@ -3,7 +3,8 @@
             [re-frame.core :as rf]
             [clojure.string :as string]
             [forest.macros :refer-macros [defstylesheet]]
-            [app.renderer.components.search :refer [search]]])
+            [app.renderer.components.search :refer [search]]
+            [app.renderer.components.spinner :refer [spinner]]])
 
 (defstylesheet styles
   [.wrapper {:width "260px"
@@ -26,7 +27,16 @@
                   :overflow "hidden"
                   :margin "5px 0"
                   :font-size "12px"
-                  :color "#a0a0a0"}])
+                  :color "#a0a0a0"}]
+  [.spinner-wrapper {:height "100vh"
+                     :width "260px"
+                     :padding "50px 0"
+                     :display "flex"
+                     :justify-content "center"
+                     :align-items "center"
+                     :flex-direction "column"}]
+  [.spinner-text {:font-size "12px"
+                  :color "#666"}])
 
 (def search-query (reagent/atom ""))
 
@@ -43,29 +53,34 @@
             (re-find re-query content))))
     lists))
 
-(defn- markdown-list []
-  (let [blog-view @(rf/subscribe [:blog-view])
-        lists (filter-by-query
-                (if blog-view @(rf/subscribe [blog-view]) [])
-                @search-query)]
-    [:div {:class list-wrapper}
-     (if (> (count lists) 0)
-       (for [item lists]
-         (let [data (get item "data")
-               content (get item "content")
-               title (get data "title")]
-           ^{:key title}
-           [:div {:class item-wrapper}
-            [:h2 {:class item-title}
-             title]
-            [:p {:class item-content}
-             content]]))
-       (if (= @search-query "")
-         [:span "正在加载..."]
-         [:span "没有匹配的文章"]))]))
+(defn- markdown-list [lists]
+  [:div {:class list-wrapper}
+   (for [item lists]
+     (let [data (get item "data")
+           content (get item "content")
+           title (get data "title")]
+       ^{:key title}
+       [:div {:class item-wrapper}
+        [:h2 {:class item-title}
+         title]
+        [:p {:class item-content}
+         content]]))])
+
+(defn loading-spinner []
+  [:div {:class spinner-wrapper}
+    [spinner {:size 40}]
+    [:p {:class spinner-text}
+     "正在加载..."]])
+
 
 (defn markdown []
-  [:div {:class wrapper}
-   [search {:on-change change-search-query}]
-   [markdown-list]])
+  (let [blog-view @(rf/subscribe [:blog-view])
+        lists (if blog-view @(rf/subscribe [blog-view]) [])
+        filter-lists (filter-by-query lists @search-query)]
+    [:div {:class wrapper}
+     [search {:on-change change-search-query}]
+     (if (not= (count filter-lists) 0)
+       [markdown-list filter-lists]
+       (if (= @search-query "")
+         [loading-spinner]))]))
 
