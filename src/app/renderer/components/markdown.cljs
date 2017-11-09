@@ -72,7 +72,6 @@
     [:p {:class spinner-text}
      "正在加载..."]])
 
-
 (defn markdown []
   (let [blog-view @(rf/subscribe [:blog-view])
         lists (if blog-view @(rf/subscribe [blog-view]) [])

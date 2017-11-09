@@ -5,6 +5,13 @@
 
 ;; BrowserWindow
 (def browser-window (.-BrowserWindow electron))
+
+(defn hide-window []
+  (let [window (.getFocusedWindow browser-window)]
+    ;; hide window but still can get window instance
+    (.setSize window 1 1)
+    (.setPosition window 0xFFFF 0xFFFF)))
+
 (defn set-window-option [option]
   (let [window (.getFocusedWindow browser-window)
         width  (:width option)

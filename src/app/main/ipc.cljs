@@ -2,7 +2,8 @@
   (:require [app.main.config :as config]
             [app.main.options :as options]
             [app.main.electorn :refer [reg-ipc-event
-                                       set-window-option]]
+                                       set-window-option
+                                       hide-window]]
             [app.main.utils :refer [index-of make-uuid]]
             [app.main.hexo :as hexo]))
 
@@ -54,8 +55,12 @@
 (reg-ipc-event
   :open-blog
   (fn [evt blog]
+    (hide-window)
     (hexo/load blog)
-    (set-window-option options/main)))
+    (js/setTimeout
+      (fn []
+        (set-window-option options/main))
+      500)))
 
 (reg-ipc-event
   :close-blog
