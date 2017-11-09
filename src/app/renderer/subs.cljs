@@ -24,4 +24,9 @@
 (rf/reg-sub
   :blog-posts
   (fn [db]
-    (:blog-post db)))
+    (:blog-posts db)))
+
+(rf/reg-sub
+  :blog-pages
+  (fn [db]
+    (:blog-pages db)))

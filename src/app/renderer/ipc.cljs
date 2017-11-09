@@ -21,3 +21,6 @@
 
 (defn get-blog-posts []
   (js->clj (ipc-send-sync :get-blog-posts)))
+
+(defn get-blog-pages []
+  (js->clj (ipc-send-sync :get-blog-pages)))

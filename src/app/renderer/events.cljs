@@ -54,5 +54,15 @@
 (rf/reg-event-db
   :blog-posts
   (fn [db]
-    (let [posts (ipc/get-blog-posts)]
-      (merge db {:blog-post posts}))))
+    (if (= (count (:blog-posts db)) 0)
+      (let [posts (ipc/get-blog-posts)]
+        (merge db {:blog-posts posts}))
+      db)))
+
+(rf/reg-event-db
+  :blog-pages
+  (fn [db]
+    (if (= (count (:blog-pages db)) 0)
+      (let [pages (ipc/get-blog-pages)]
+        (merge db {:blog-pages pages}))
+      db)))

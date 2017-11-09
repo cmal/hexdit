@@ -5,5 +5,6 @@
    :current-blog nil
    :current-page nil
    :blog-view nil
-   :blog-posts {}})
+   :blog-posts {}
+   :blog-pages {}})
 

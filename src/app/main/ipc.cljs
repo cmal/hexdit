@@ -73,3 +73,10 @@
     (let [posts (hexo/get-posts)]
       (aset evt "returnValue" (clj->js posts)))))
 
+(reg-ipc-event
+  :get-blog-pages
+  (fn [evt]
+    (let [pages (hexo/get-pages)]
+      (println pages)
+      (aset evt "returnValue" (clj->js pages)))))
+

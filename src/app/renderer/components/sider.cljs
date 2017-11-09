@@ -34,7 +34,8 @@
 
 (defn- select-item [item]
   (let [view (:id item)]
-    (rf/dispatch-sync [:blog-view view])))
+    (rf/dispatch [:blog-view view])
+    (rf/dispatch [view])))
 
 (defn- menu-item [item]
   [:div {:class (class-names item-wrapper
@@ -52,8 +53,7 @@
 
 (defn- did-mount []
   (let [first-menu (first constants/menu)]
-    (select-item first-menu)
-    (rf/dispatch-sync [(:id first-menu)])))
+    (select-item first-menu)))
 
 (defn- render []
   [:nav {:class wrapper}

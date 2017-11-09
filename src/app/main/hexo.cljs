@@ -33,3 +33,22 @@
             (merge file-data {"path" file-path})))
         files))))
 
+(defn get-pages []
+  (let [blog-path (get @blog-info "path")
+        page-path (.join path blog-path "source")
+        files (filterv
+                (fn [file-path]
+                  (not (re-find #"_post" file-path))
+                  (and (not (re-find #"_post" file-path))
+                       (.existsSync fs (.join path file-path "index.md"))))
+                (mapv
+                  (fn [file-name]
+                    (.join path page-path file-name))
+                  (js->clj (.readdirSync fs page-path))))]
+    (mapv
+      (fn [file]
+        (let [file-path (.join path file "index.md")
+              file-content (.toString (.readFileSync fs file-path))
+              file-data (js->clj (matter file-content))]
+          (merge file-data {"path" file-path})))
+      files)))
